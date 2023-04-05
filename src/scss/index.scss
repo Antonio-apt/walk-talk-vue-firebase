@@ -1,0 +1,14 @@
+@import url(https://api.fontshare.com/v2/css?f[]=general-sans@200,500,300,600,400,700&display=swap);
+@import './_normalize.scss';
+@import './_variables.scss';
+
+* {
+  margin: 0;
+  line-height: calc(1em + 0.5rem);
+  font-family: 'General Sans', sans-serif;
+}
+
+body {
+  background-color: $bg-color;
+  color: $color;
+}

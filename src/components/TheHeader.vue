@@ -1,19 +1,33 @@
+<script setup>
+import { useModalStore } from "@/stores/modal";
+
+const store = useModalStore();
+</script>
+
 <template>
   <header class="header">
-    <h1>Vue Firebase</h1>
+    <h1 class="header__title">Vue 
+      <span class="header__title--yellow">Firebase</span>
+      Chat
+    </h1>
+
+    <button @click="store.open()">
+      Login
+    </button>
   </header>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style lang="scss">
 .header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: $bg-header;
+  padding: 1rem;
+  &__title {
+    color: $clr-green;
+    &--yellow {
+      color: $clr-yellow;
+    }
+  }
 }
 </style>

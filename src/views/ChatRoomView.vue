@@ -1,6 +1,7 @@
 <script setup>
 import UserStatus from '@/components/UserStatus.vue'
 import LoginForm from '@/components/LoginForm.vue'
+import ChatMessage from '@/components/ChatMessage.vue'
 
 import { collection, query, orderBy, limit } from 'firebase/firestore'
 import { useCollection } from 'vuefire'
@@ -34,6 +35,8 @@ const addMessage = async (uid) => {
     sender: uid,
     createdAt: Date.now()
   })
+  loading.value = false
+  newMessageText.value = ''
 }
 </script>
 
@@ -46,7 +49,10 @@ const addMessage = async (uid) => {
         <div v-if="user">
           <ul>
             <li v-for="message of messages" :key="message.id">
-              {{ message.text }}
+              <ChatMessage 
+                :message="message"
+                :owner="message.sender === user.uid"
+              />
             </li>
           </ul>
 
@@ -67,3 +73,22 @@ const addMessage = async (uid) => {
     </UserStatus>
   </main>
 </template>
+
+<style scoped>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  background-color: #efefef;
+  padding: 10px;
+  border: 0;
+}
+
+li {
+  display: flex;
+}
+
+</style>
