@@ -1,6 +1,7 @@
 <script setup>
 import LoginForm from '../components/LoginForm.vue'
 import UserStatus from '../components/UserStatus.vue'
+import UserProfile from '../components/UserProfile.vue';
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import UserStatus from '../components/UserStatus.vue'
     <UserStatus>
       <template v-slot:user="{ user }">
         <div v-if="user">
-          logged in as {{ user.uid }}
+          <UserProfile :user="user"/>
         </div>
         <LoginForm v-else/>
       </template>
