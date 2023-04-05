@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <h1>Header</h1>
+  <header class="header">
+    <h1>Vue Firebase</h1>
   </header>
 </template>
 
@@ -10,6 +10,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
 </style>

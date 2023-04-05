@@ -11,7 +11,7 @@
   })
   
   const chatsCollection = collection(db, 'chats')
-  const chats = useCollection((query(chatsCollection, where('owner', '==', props.uid))))
+  const chats = useCollection(query(chatsCollection, where('owner', '==', props.uid)))
 
   const createChatRoom = async () => {
      await addDoc((chatsCollection), {

@@ -1,14 +1,14 @@
 <script setup>
-import LoginForm from '../components/LoginForm.vue'
-import UserStatus from '../components/UserStatus.vue'
-import UserProfile from '../components/UserProfile.vue';
-import ChatList from '../components/ChatList.vue';
+import LoginForm from '@/components/LoginForm.vue'
+import UserStatus from '@/components/UserStatus.vue'
+import UserProfile from '@/components/UserProfile.vue';
+import ChatList from '@/components/ChatList.vue';
 </script>
 
 <template>
   <main>
     <UserStatus>
-      <template v-slot:user="{ user }">
+      <template #user="{ user }">
         <div v-if="user">
           <UserProfile :user="user"/>
           <ChatList :uid="user.uid" />
