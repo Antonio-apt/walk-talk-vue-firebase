@@ -7,7 +7,9 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/eslint-config-prettier/skip-formatting'
+    
   ],
+  
   overrides: [
     {
       files: [
@@ -15,8 +17,9 @@ module.exports = {
       ],
       'extends': [
         'plugin:cypress/recommended'
-      ]
+      ],
     }
+    
   ],
   parserOptions: {
     ecmaVersion: 'latest'
