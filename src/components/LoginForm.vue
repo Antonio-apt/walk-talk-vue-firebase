@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 import { auth } from '@/firebase'
 
-let email = ref('')
-let password = ref('')
-let activeButton = ref(false)
-let loading = ref(false)
-let errorMessage = ref('')
-let newUser = ref(false)
+const email = ref('')
+const password = ref('')
+const activeButton = ref(false)
+const loading = ref(false)
+const errorMessage = ref('')
+const newUser = ref(false)
 
 const signInOrCreateUser = async () => {
  
@@ -25,7 +25,6 @@ const signInOrCreateUser = async () => {
 
  loading.value= false;
 }
-
 
 const signInAnonymously = () => {
   activeButton.value = true

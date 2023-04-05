@@ -2,6 +2,7 @@
 import LoginForm from '../components/LoginForm.vue'
 import UserStatus from '../components/UserStatus.vue'
 import UserProfile from '../components/UserProfile.vue';
+import ChatList from '../components/ChatList.vue';
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import UserProfile from '../components/UserProfile.vue';
       <template v-slot:user="{ user }">
         <div v-if="user">
           <UserProfile :user="user"/>
+          <ChatList :uid="user.uid" />
         </div>
         <LoginForm v-else/>
       </template>
