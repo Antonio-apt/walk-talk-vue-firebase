@@ -11,8 +11,11 @@ const store = useModalStore();
       Chat
     </h1>
 
-    <button @click="store.open()">
-      Login
+    <button 
+      @click="store.open()"
+      class="btn"
+    >
+      Login / Register
     </button>
   </header>
 </template>
