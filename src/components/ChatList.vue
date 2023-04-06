@@ -1,6 +1,5 @@
 <script setup>
   import { db } from '@/firebase'
-  // import { ref } from 'vue'
   import { useCollection } from 'vuefire'
   import { collection, query, where, addDoc } from 'firebase/firestore'
 
@@ -11,16 +10,20 @@
   })
   
   const chatsCollection = collection(db, 'chats')
-  const chats = useCollection(query(chatsCollection, where('owner', '==', props.uid)))
+  const chatsQuery = query(chatsCollection, where('owner', '==', props.uid))
+  const chats = useCollection(chatsQuery)
 
   const createChatRoom = async () => {
-     await addDoc((chatsCollection), {
-      createdAt: Date.now(),
-      owner: props.uid,
-      members: [props.uid]
-    })
+    try {
+      await addDoc((chatsCollection), {
+        createdAt: Date.now(),
+        owner: props.uid,
+        members: [props.uid]
+      })
+    } catch (error) {
+      console.error(error)
+    }
   }
-
 </script>
 
 <template>

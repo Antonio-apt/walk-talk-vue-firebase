@@ -7,44 +7,53 @@ const password = ref('')
 const activeButton = ref(false)
 const loading = ref(false)
 const errorMessage = ref('')
-const newUser = ref(false)
+const isNewUser = ref(false)
 
-const signInOrCreateUser = async () => {
- 
- loading.value = true;
- errorMessage.value = '';
- try {
-   if (newUser.value) {
-     await auth.createUserWithEmailAndPassword(email.value, password.value)
-   } else {
-     await auth.signInWithEmailAndPassword(email.value, password.value)
-   }
- } catch (error) {
-     errorMessage.value = error.message;
- }
+const signIn = async () => {
+  loading.value = true
+  errorMessage.value = ''
+  try {
+    await auth.signInWithEmailAndPassword(email.value, password.value)
+  } catch (error) {
+    errorMessage.value = error.message
+  }
+  loading.value = false
+}
 
- loading.value= false;
+const signUp = async () => {
+  loading.value = true
+  errorMessage.value = ''
+  try {
+    await auth.createUserWithEmailAndPassword(email.value, password.value)
+  } catch (error) {
+    errorMessage.value = error.message
+  }
+  loading.value = false
 }
 
 const signInAnonymously = () => {
   activeButton.value = true
   auth.signInAnonymously()
 }
+
+const validateInput = () => {
+  return email.value.trim() !== '' && password.value.trim() !== ''
+}
 </script>
 
 <template>
   <aside class="section">
     <h3>Sign in Anonymously</h3>
-    <button class="button" @click="signInAnonymously()">Sign In</button>
+    <button class="button" :class="{ 'is-loading': activeButton }" @click="signInAnonymously()">Sign In</button>
 
-    <div v-if="newUser">
+    <div v-if="isNewUser">
       <h3>Sign Up for a New Account</h3>
-      <a href="#" @click="newUser = false">Returning User?</a>
+      <a href="#" @click="isNewUser = false">Returning User?</a>
     </div>
 
     <div v-else>
       <h3>Sign In with Email</h3>
-      <a href="#" @click="newUser = true">New user?</a>
+      <a href="#" @click="isNewUser = true">New user?</a>
     </div>
 
     <label for="email">Email</label>
@@ -61,8 +70,9 @@ const signInAnonymously = () => {
     <button
       class="button is-info"
       :class="{ 'is-loading': loading }"
-      @click="signInOrCreateUser()"
-    >{{ newUser ? 'Sign Up' : 'Login'}}</button>
+      @click="isNewUser ? signUp() : signIn()"
+      :disabled="!validateInput()"
+    >{{ isNewUser ? 'Sign Up' : 'Login'}}</button>
 
     <p class="has-text-danger" v-if="errorMessage">{{ errorMessage }}</p>
   </aside>

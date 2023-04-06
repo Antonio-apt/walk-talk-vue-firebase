@@ -9,7 +9,7 @@ const store = useModalStore();
     <div class="modal">
     </div>
     <div class="modal-close">
-      <img @click="store.close" class="modal-close__close-img" src="@/assets/close-icon.svg" alt="" />
+      <img @click="store.isOpen(false)" class="modal-close__close-img" src="@/assets/close-icon.svg" alt="" />
     </div>
   </div>
 </template>

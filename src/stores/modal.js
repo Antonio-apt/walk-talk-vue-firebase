@@ -1,17 +1,27 @@
 import { ref } from 'vue'
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-export const useModalStore = defineStore("modal", () => {
+export const useModalStore = defineStore('modal', () => {
+  const _isOpen = ref(false)
 
-  const isOpen = ref(false);
-
-  function open() {
-    isOpen.value = true;
+  function _open() {
+    _isOpen.value = true
   }
 
-  function close() {
-    isOpen.value = false;
+  function _close() {
+    _isOpen.value = false
   }
 
-  return { isOpen, open, close };
+  return {
+    get isOpen() {
+      return _isOpen.value
+    },
+    set isOpen(value) {
+      if (value) {
+        _open()
+      } else {
+        _close()
+      }
+    },
+  }
 })

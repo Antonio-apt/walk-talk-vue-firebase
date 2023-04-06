@@ -12,7 +12,7 @@ const store = useModalStore();
     </h1>
 
     <button 
-      @click="store.open()"
+      @click="store.isOpen(true)"
       class="btn"
     >
       Login / Register

@@ -26,17 +26,28 @@ const messages = useCollection(
 )
 
 const addMessage = async (uid) => {
+  if (!newMessageText.value || loading.value) {
+    return
+  }
+
   loading.value = true
 
-  const { id: messageId } = messagesCollection.value.doc()
+  try {
+    const { id: messageId } = messagesCollection.value.doc()
 
-  await messagesCollection.value.doc(messageId).set({
-    text: newMessageText.value,
-    sender: uid,
-    createdAt: Date.now()
-  })
-  loading.value = false
-  newMessageText.value = ''
+    await messagesCollection.value.doc(messageId).set({
+      text: newMessageText.value,
+      sender: uid,
+      createdAt: Date.now()
+    })
+  } catch (error)  {
+    console.error(error)
+  } finally {
+    loading.value = false
+    newMessageText.value = ''
+  }
+
+  
 }
 </script>
 
